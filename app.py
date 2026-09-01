@@ -2,7 +2,7 @@ from flask import Flask, request, render_template
 import sqlite3
 
 app = Flask(__name__)
-# DB
+# Database opsætning
 DB_ARCHITECTS = "./db/arcitects.db"
 
 # Routes
