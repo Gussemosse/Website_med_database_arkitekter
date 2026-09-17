@@ -1,5 +1,7 @@
 <html>
-    <h2 style="color: pink; text-align: center;">hello world</h2>
+    {% for i in range(count) %}
+    <a href="{{ url_for('architect',aid=ids[i]) }}" style="color: pink; text-align: center;">{{ architects[i] }}</a>
+    {% endfor %}
 
     <form method="POST" action="">
         <input type="text" name="search_term" placeholder="Search..." required>

@@ -5,36 +5,55 @@ app = Flask(__name__)
 # Database opsætning
 DB_ARCHITECTS = "./db/architects.db"
 
-def get_db(db, query, params=()):
-    conn = sqlite3.connect(db)
-    conn.row_factory = sqlite3.Row
-    cur = conn.cursor()
-    cur.execute(query, params)
+def get_aids(search):
+    con = sqlite3.connect(DB_ARCHITECTS)
+    con.row_factory = sqlite3.Row
+    cur = con.cursor()
+    query = "select aid from buildings where name like ?"
+    cur.execute(query, (search,))
     res = cur.fetchall()
     cur.close()
-    conn.close()
-    return res
+    con.close()
+    return [list(r)[0] for r in res] if res != [] else [-1]
+
+def get_architect_from_aid(aid):
+    con = sqlite3.connect(DB_ARCHITECTS)
+    cur = con.cursor()
+    query = "select name from architects where aid=?"
+    cur.execute(query, (aid,))
+    res = cur.fetchone()
+    cur.close()
+    con.close()
+    return res[0]
+
+def get_architect_info(aid):
+    con = sqlite3.connect(DB_ARCHITECTS)
+    cur = con.cursor()
+    query = "select * from architects where aid=?"
+    cur.execute(query, (aid,))
+    res = cur.fetchall()
+    cur.close()
+    con.close()
+    return res[0]
 
 # Routes
-@app.route("/", methods=["POST"])
+@app.route("/", methods=["POST", "GET"])
 def index():
+    names = []
+    aids = []
     if request.method == "POST":
-        search_term = request.form.get("search_term", "")
-        return db_search(search_term)
-    return render_template("index.html", title="Home Page")
+        post_input = request.form.get("search_term")
+        aids = list(set(get_aids(f"%{post_input}%")))
+        if aids[0] != -1:
+            for i in aids:
+                names.append(get_architect_from_aid(i))
+        
+    return render_template("index.html", architects=names, ids=aids, count=len(aids))
 
-def db_search(search_term):
-    query = """
-        SELECT architects.*, buildings.* 
-        FROM architects
-        INNER JOIN buildings ON architects.aid = buildings.aid
-        WHERE architects.name LIKE ?
-    """
-    
-    data = get_db(DB_ARCHITECTS, query, ('%' + search_term + '%',))
-    
-    return render_template("index.html", data=data)
-
+@app.route("/architect")
+def architect():
+    architect_data = get_architect_info(int(request.args.get("aid", -1)))
+    return render_template("architect.html", data=architect_data)
 
 # Start Flask server
 if __name__ == "__main__":
