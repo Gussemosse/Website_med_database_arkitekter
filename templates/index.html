@@ -1,11 +1,14 @@
 <html>
+    {% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
+content %}
+
     {% for i in range(count) %}
     <a href="{{ url_for('architect',aid=ids[i]) }}" style="color: pink; text-align: center;">{{ architects[i] }}</a>
     {% endfor %}
 
     <form method="POST" action="">
-        <input type="text" name="search_term" placeholder="Search..." required>
+        <input type="text" name="search_term" placeholder="Søg... f.eks 'eiffeltower'" required>
         <button type="submit">Search</button>
     </form>
-
+    {% endblock %}
 </html>

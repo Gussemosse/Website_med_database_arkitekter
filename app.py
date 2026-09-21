@@ -55,6 +55,10 @@ def architect():
     architect_data = get_architect_info(int(request.args.get("aid", -1)))
     return render_template("architect.html", data=architect_data)
 
+@app.route("/architects")
+def architects():
+    return render_template("architects.html")
+
 # Start Flask server
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

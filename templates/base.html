@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}My webserver{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='main.css') }}"
+    />
+  </head>
+  <body>
+    <div class="App">
+      <header class="App-header">
+        <nav class="menu">
+          <a href="/" class="{% if request.path == '/' %}active{% endif %}"
+            >Forside</a
+          >
+          <span class="separator"></span>
+          <a
+            href="/architects"
+            class="{% if request.path == '/search' %}active{% endif %}"
+            >Arkitekter</a
+          >
+        </nav>
+      {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
