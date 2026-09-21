@@ -6,9 +6,11 @@ content %}
     <a href="{{ url_for('architect',aid=ids[i]) }}" style="color: pink; text-align: center;">{{ architects[i] }}</a>
     {% endfor %}
 
-    <form method="POST" action="">
+    <form class="whitespace" method="POST" action="">
         <input type="text" name="search_term" placeholder="Søg... f.eks 'eiffeltower'" required>
         <button type="submit">Search</button>
     </form>
+
+    </p>
     {% endblock %}
 </html>

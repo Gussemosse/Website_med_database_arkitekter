@@ -11,13 +11,15 @@
     <div class="App">
       <header class="App-header">
         <nav class="menu">
-          <a href="/" class="{% if request.path == '/' %}active{% endif %}"
+
+          <div class="block_1"></div> <hr/>
+
+          <a href="/" class="forside"
             >Forside</a
           >
           <span class="separator"></span>
           <a
-            href="/architects"
-            class="{% if request.path == '/search' %}active{% endif %}"
+            href="/architects" class="arkitekter"
             >Arkitekter</a
           >
         </nav>

@@ -6,3 +6,44 @@
     justify-content: flex-start;
     font-size: calc(10px + 2vmin);
 }
+
+hr { 
+    width: 95vw;
+    margin-left: calc((95vw - 100%) / -2);
+    margin-right: calc((95vw - 100%) / -2);
+    border: 5px solid #e7d1c4;
+    border-top: 1px;
+    border-radius: 7px 7px 7px 7px;
+}
+
+.whitespace {
+    position: absolute;
+    top: 50%;
+    left: 48%;
+    margin-top: -50px;
+    margin-left: -50px;
+    height: 100px;
+}
+
+.forside {
+    margin-right: 100px;
+    text-decoration: none;
+    color: #e7d1c4;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.forside:hover {
+    transform: scale(1.2);
+}
+
+.arkitekter {
+    text-decoration: none;
+    color: #e7d1c4;
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.arkitekter:hover {
+    transform: scale(1.2);
+}
