@@ -1,16 +1,45 @@
+<!-- 
+Color Scheme: 
+Warm Beige / Organic Palette (Soft & Calm)
+
+Background: Warm Cream (#FBF9F5)
+Text / Primary: Dark Earth / Espresso (#3C3836)
+Accent (Buttons/Links): Olive Green (#2A6B5C)
+Secondary / Borders: Muted Taupe (#D8C9A8) 
+-->
+
 <html>
     {% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
 content %}
-
+        
     {% for i in range(count) %}
     <a href="{{ url_for('architect',aid=ids[i]) }}" style="color: pink; text-align: center;">{{ architects[i] }}</a>
     {% endfor %}
+    
+    <p class="whitespace2">
 
-    <form class="whitespace" method="POST" action="">
-        <input type="text" name="search_term" placeholder="Søg... f.eks 'eiffeltower'" required>
-        <button type="submit">Search</button>
-    </form>
+        Find arkitekten bag et arkitektonisk mesterværk
 
     </p>
+        <form method="POST">
+            <div class="whitespace">
+                <input type="text" name="search_term" placeholder="     Søg... f.eks 'eiffeltower'" required>
+                <button type="submit">Search</button>
+            </div>
+        </form>
+
+    </p>
+    <div class="row">
+        <div class="column">
+            <img class="eiffel-tower" src="/static/eiffel-tower.png" width="250">
+        </div>
+        <div class="column">
+            <img class="the-shard" src="/static/the-shard.png" width="240">
+        </div>
+        <div class="column">
+            <img class="maria-pia" src="/static/maria-pia.png" width="540">
+        </div>
+    </div>
+
     {% endblock %}
 </html>
