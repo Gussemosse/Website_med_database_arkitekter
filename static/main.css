@@ -21,39 +21,53 @@ body {
 }
 
 .whitespace {   
-    top: 50%;
+    display: flex;
     align-items: center;
+    justify-content: center;
+    gap: 8px;
     height: 37px;
     width: 250px;
     background-color: #2A6B5C;
     border-radius: 25px 25px 25px 25px;
     border: 2px solid #D8C9A8;
+    box-sizing: border-box;
 }
 
 .whitespace2 {
-    margin-top: 130px;
+    margin-top: 60px;
     text-decoration: none;
-    color:#3C3836;
+    color: #3C3836;
     font-size: xx-large;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
+
+    display: block; 
+    text-align: center;
 }
 
 input {
     background: transparent;
-    border: transparent;
+    border: none;
+    outline: none;
     color: #D8C9A8;
-    width: 180px;
+    width: 165px;
+    height: 100%;
     border-radius: 15px 15px 15px 15px;
 }
 
 button {
+    display: flex;
+    align-items: center;
     background-color: #D8C9A8;
-    border: transparent;
+    border: none;
     color: #3C3836;
     border-radius: 7px 7px 7px 7px;
+    height: 25px; 
+    padding: 0 10px;
+    font-size: 14px;
+    cursor: pointer;
+
+    &:hover {
+        color: #2A6B5C;
+    }
 }
 
 .forside {
@@ -79,32 +93,75 @@ button {
     transform: scale(1.2);
 }
 
-.the-shard {
-    margin-right: 500px;
+.billede-box img {
+    width: 100%;
+    object-fit: cover;
+    border-radius: 15px 15px 0 0;
+    box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+    display: block;
+}
+
+.the-shard img {
+    height: 70vh;
+}
+
+.eiffel-tower img {
+    height: 55vh;
+}
+
+.maria-pia img {
+    height: 15vh;
+}
+
+.billede-box {
+    flex: 1;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    align-items: flex-end;
 }
 
-.eiffel-tower {
-    margin-top: -120px;
-    margin-right: 1000px;
+.row {
+    flex: 1.2;
     display: flex;
-    align-items: center;
-    justify-content: flex-start;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 20px;
+    max-width: 50vw;
 }
 
-.maria-pia {
-    margin-top: 200px;
-    margin-left: 250px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
+.søgeresultater {
+    margin-top: 15px;
+    display: inline-block;
+    width: 250px;
+    text-align: center;
+
+    h3 {
+        font-size: 18px;
+        color: #2A6B5C;
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #3C3836;
+        font-size: 16px;
+        transition: color 0.2s ease;
+
+        &:hover {
+            color: #2A6B5C;
+        }
+    }
 }
 
-.column {
-  float: left;
-  width: 23%;
-  padding: 5px;
+.ingen-resultater {
+    margin-top: 20px;
+    font-size: 16px;
+    color: #888;
 }
-

@@ -5,35 +5,46 @@ app = Flask(__name__)
 # Database opsætning
 DB_ARCHITECTS = "./db/architects.db"
 
+# Funktion der søger i databasen og finder arkitekt-ID'er baseret på bygningsnavn
 def get_aids(search):
     con = sqlite3.connect(DB_ARCHITECTS)
     con.row_factory = sqlite3.Row
     cur = con.cursor()
+    # Henter arkitekt id fra tabellen buildings, hvor like gør, at jeg kun behøver at søge på dele af ordet :)
     query = "select aid from buildings where name like ?"
     cur.execute(query, (search,))
     res = cur.fetchall()
     cur.close()
     con.close()
+    # Løber alle resultaterne igennem, trækker det allerførste element ud (arkitektens ID-tal) og laver det om til en ren liste af tal
+    # Hvis databasen ikke finder noget, så bliver [-1] retuneret som liste med et element.
     return [list(r)[0] for r in res] if res != [] else [-1]
 
+# Her bliver der hentet et specifikt arkitekt navn
 def get_architect_from_aid(aid):
     con = sqlite3.connect(DB_ARCHITECTS)
     cur = con.cursor()
+    # Henter navnet fra tabellen architects, hvor aid passer præcis med det ID-tal, der sendes med ind.
     query = "select name from architects where aid=?"
     cur.execute(query, (aid,))
+    # Da hvert ID er unikt for en arkitekt, bruges fetchone().
     res = cur.fetchone()
     cur.close()
     con.close()
+    # Returnerer selve navnestringen (f.eks. "Gustave Eiffel"), så den kan vise den på skærmen.
     return res[0]
 
+# Henter ALT data om en arkitekt, for at blive sendt ind på profilsiden af specifik arkitekt (/architect?aid=X).
 def get_architect_info(aid):
     con = sqlite3.connect(DB_ARCHITECTS)
     cur = con.cursor()
+    #Henter alle kolonner fra tabellen architects, for den specifikke arkitekt-ID.
     query = "select * from architects where aid=?"
     cur.execute(query, (aid,))
     res = cur.fetchall()
     cur.close()
     con.close()
+    # Henter dataene og returnerer den første række. Det giver en samlet liste med alle informationerne om arkitekten
     return res[0]
 
 # Routes
