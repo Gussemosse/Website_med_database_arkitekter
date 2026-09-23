@@ -11,8 +11,8 @@ def get_aids(search):
     con.row_factory = sqlite3.Row
     cur = con.cursor()
     # Henter arkitekt id fra tabellen buildings, hvor like gør, at jeg kun behøver at søge på dele af ordet :)
-    query = "select aid from buildings where name like ?"
-    cur.execute(query, (search,))
+    query = "select aid from buildings where name like ? or year like ? or location like ?"
+    cur.execute(query, (search, search, search,))
     res = cur.fetchall()
     cur.close()
     con.close()
@@ -37,6 +37,7 @@ def get_architect_from_aid(aid):
 # Henter ALT data om en arkitekt, for at blive sendt ind på profilsiden af specifik arkitekt (/architect?aid=X).
 def get_architect_info(aid):
     con = sqlite3.connect(DB_ARCHITECTS)
+    con.row_factory = sqlite3.Row # <- så jeg kan bruge mine kolonnenavne direkte til bedre styling
     cur = con.cursor()
     #Henter alle kolonner fra tabellen architects, for den specifikke arkitekt-ID.
     query = "select * from architects where aid=?"

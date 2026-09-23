@@ -1,10 +1,25 @@
-<html>
-    {% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
-content %}
-    <body>
+{% extends "base.html" %} 
+{% block title %}{{ title }}{% endblock %} 
 
-        Her er en liste af alle arkitekter
+{% block content %}
 
-    </body>
-    {% endblock %}
-</html>
+<body>
+
+    <div class="arkitekter-liste">
+
+        <p>Liste af alle arkitekter</p>
+
+        <ul>
+            <li>
+                <a href="architect?aid=1">Gustave Eiffel</a>
+            </li>
+            <li>
+                <a href="architect?aid=2">Renzo Piano</a>
+            </li>
+        </ul>
+
+    </div>
+
+</body>
+
+{% endblock %}

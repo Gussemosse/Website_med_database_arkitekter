@@ -8,56 +8,53 @@ Accent (Buttons/Links): Olive Green (#2A6B5C)
 Secondary / Borders: Muted Taupe (#D8C9A8) 
 -->
 
-<html>
-    {% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
-content %}
-        
-    <p class="whitespace2">
-        Find arkitekten bag et arkitektonisk mesterværk
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %} 
+
+{% block content %}
+
+  <p class="whitespace2">
+      Find arkitekten bag et arkitektonisk mesterværk
+  </p>
+      <form method="POST">
+        <div class="whitespace">
+            <input type="text" name="search_term" placeholder="     Søg... f.eks 'eiffeltower'" required>
+            <button type="submit">Search</button>
+         </div>
+     </form>
+      {% if architects %}
+     <div class="søgeresultater">
+        <h3>Resultater:</h3>
+       <ul>
+        <!-- looper over arkitekterne -->
+         {% for name in architects %}
+           <li>
+             <a href="/architect?aid={{ ids[loop.index0] }}">{{ name }}</a>
+           </li>
+         {% endfor %}
+      </ul>
+     </div>
+      <!--
+      count == 1: tjekker om Flask app.py returnerede præcis en ting i ID-listen.
+      ids[0] == -1: tjekker om det første element i den liste er tallet -1
+      -->
+      {% elif count == 1 and ids[0] == -1 %}
+     <p class="ingen-resultater">Ingen arkitekter fundet.</p>
+      {% endif %}
+     <p>
+        <!-- laver afstand -->
     </p>
 
-        <form method="POST">
-            <div class="whitespace">
-                <input type="text" name="search_term" placeholder="     Søg... f.eks 'eiffeltower'" required>
-                <button type="submit">Search</button>
-            </div>
-        </form>
-
-        {% if architects %}
-        <div class="søgeresultater">
-          <h3>Resultater:</h3>
-          <ul>
-            <!-- looper over arkitekterne -->
-            {% for name in architects %}
-              <li>
-                <a href="/architect?aid={{ ids[loop.index0] }}">{{ name }}</a>
-              </li>
-            {% endfor %}
-          </ul>
-        </div>
-        <!--
-        count == 1: tjekker om Flask app.py returnerede præcis en ting i ID-listen.
-        ids[0] == -1: tjekker om det første element i den liste er tallet -1
-        -->
-        {% elif count == 1 and ids[0] == -1 %}
-        <p class="ingen-resultater">Ingen arkitekter fundet.</p>
-        {% endif %}
-
-        <p>
-            <!-- laver afstand -->
-        </p>
-
-    <div class="row">
-        <div class="billede-box the-shard">
-            <img class="eiffel-tower" src="/static/eiffel-tower.png" alt="The Shard" width="250">
-        </div>
-        <div class="billede-box eiffel-tower">
-            <img class="the-shard" src="/static/the-shard.png" alt="Eiffel Tower" width="240">
-        </div>
-        <div class="billede-box maria-pia">
-            <img class="maria-pia" src="/static/maria-pia.png" alt="Maria Pia" width="540">
-        </div>
+ <div class="row">
+      <div class="billede-box the-shard">
+        <img class="eiffel-tower" src="/static/eiffel-tower.png" alt="The Shard" width="250">
     </div>
+     <div class="billede-box eiffel-tower">
+        <img class="the-shard" src="/static/the-shard.png" alt="Eiffel Tower" width="240">
+    </div>
+     <div class="billede-box maria-pia">
+        <img class="maria-pia" src="/static/maria-pia.png" alt="Maria Pia" width="540">
+    </div>
+</div>
 
-    {% endblock %}
-</html>
+{% endblock %}

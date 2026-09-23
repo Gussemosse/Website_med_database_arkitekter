@@ -165,3 +165,30 @@ button {
     font-size: 16px;
     color: #888;
 }
+
+.arkitekter-liste {
+    align-items: center;
+    display: inline-block;
+    text-align: center;
+
+    p {
+        color: #3C3836;
+    }
+
+    ul {
+        list-style: disc;
+        padding: 0;
+        margin: 0;
+    }
+
+    a {
+    text-decoration: none;
+    color: #3C3836;
+    font-size: 20px;
+    transition: color 0.2s ease;
+
+    &:hover {
+        color: #2A6B5C;
+    }
+    }
+}

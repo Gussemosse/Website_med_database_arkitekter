@@ -1,12 +1,21 @@
-<html>
-    {% extends "base.html" %} {% block title %}{{ title }}{% endblock %} {% block
-content %}
-    <body>
+{% extends "base.html" %} 
+{% block title %}{{ data[1] }}{% endblock %} 
 
-        <h1>
-            {{ data }}
-        </h1>
+{% block content %}
 
-    </body>
-    {% endblock %}
-</html>
+<body style="color: #3C3836;">
+
+        <h1>{{ data[1] }}</h1>
+
+        <p><strong>Nationalitet:</strong> {{ data[2] }}</p>
+        <p><strong>Fødselsår:</strong> {{ data[3] }}</p>
+    
+        {% if data[4] %}
+            <p><strong>Dødsår:</strong> {{ data[4] }} (Alder: {{ data[5] }} år)</p>
+        {% else %}
+            <p><strong>Status:</strong> Nuværende alder er ikke angivet (Arkitekt er <i>nulevende</i>)</p>
+        {% endif %}
+
+</body>
+
+{% endblock %}
