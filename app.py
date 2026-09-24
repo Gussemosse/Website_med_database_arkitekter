@@ -83,6 +83,10 @@ def architects():
     info = get_all_architect_info()
     return render_template("architects.html", all=info)
 
+@app.route("/dokumentationside")
+def dokument():
+    return render_template("dokumentationside.html")
+
 # Start Flask server
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8080, debug=True)

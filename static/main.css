@@ -59,7 +59,7 @@ button {
     background-color: #D8C9A8;
     border: none;
     color: #3C3836;
-    border-radius: 7px 7px 7px 7px;
+    border-radius: 15px 15px 15px 15px;
     height: 25px; 
     padding: 0 10px;
     font-size: 14px;
@@ -70,27 +70,28 @@ button {
     }
 }
 
-.forside {
-    margin-right: 100px;
-    text-decoration: none;
-    color: #2A6B5C;
-    display: inline-block;
-    transition: transform 0.3s ease;
+.seperate-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 280px;
+  width: 80vw;
 }
 
-.forside:hover {
-    transform: scale(1.2);
+.forside, .arkitekter, .dokument {
+  text-decoration: none;
+  color: #2A6B5C;
+  display: inline-block;
+  transition: transform 0.3s ease;
+  text-align: center;
 }
 
-.arkitekter {
-    text-decoration: none;
-    color: #2A6B5C;
-    display: inline-block;
-    transition: transform 0.3s ease;
+.forside:hover, .arkitekter:hover, .dokument:hover {
+  transform: scale(1.2);
 }
 
-.arkitekter:hover {
-    transform: scale(1.2);
+.forside, .dokument {
+  width: 200px; 
 }
 
 .billede-box img {
