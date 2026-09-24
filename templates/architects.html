@@ -1,5 +1,5 @@
 {% extends "base.html" %} 
-{% block title %}{{ title }}{% endblock %} 
+{% block title %}{% endblock %} 
 
 {% block content %}
 
@@ -9,14 +9,11 @@
 
         <p>Liste af alle arkitekter</p>
 
-        <ul>
+        {% for architect in all %}
             <li>
-                <a href="architect?aid=1">Gustave Eiffel</a>
+                <a href="/architect?aid={{ architect[0] }}">{{ architect[1] }}</a>
             </li>
-            <li>
-                <a href="architect?aid=2">Renzo Piano</a>
-            </li>
-        </ul>
+        {% endfor %}
 
     </div>
 

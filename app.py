@@ -67,9 +67,21 @@ def architect():
     architect_data = get_architect_info(int(request.args.get("aid", -1)))
     return render_template("architect.html", data=architect_data)
 
+# Henter alt data, uden et aid - det er til den fulde arkitekt side, med en liste over alle arkitekter.
+def get_all_architect_info():
+    con = sqlite3.connect(DB_ARCHITECTS)
+    cur = con.cursor()
+    query = "select * from architects"
+    cur.execute(query,)
+    res = cur.fetchall()
+    cur.close()
+    con.close()
+    return res
+
 @app.route("/architects")
 def architects():
-    return render_template("architects.html")
+    info = get_all_architect_info()
+    return render_template("architects.html", all=info)
 
 # Start Flask server
 if __name__ == "__main__":

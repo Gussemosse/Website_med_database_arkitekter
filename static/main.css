@@ -180,6 +180,10 @@ button {
         margin: 0;
     }
 
+    li {
+        text-align: left;
+    }
+
     a {
     color: #3C3836;
     font-size: 20px;
