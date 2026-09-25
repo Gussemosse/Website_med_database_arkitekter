@@ -71,7 +71,7 @@ def architect():
 def get_all_architect_info():
     con = sqlite3.connect(DB_ARCHITECTS)
     cur = con.cursor()
-    query = "select * from architects"
+    query = "select * from architects order by name asc"
     cur.execute(query,)
     res = cur.fetchall()
     cur.close()
