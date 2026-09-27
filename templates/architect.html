@@ -1,21 +1,26 @@
 {% extends "base.html" %} 
-{% block title %}{{ data[1] }}{% endblock %} 
+{% block title %}{{ data['name'] }}{% endblock %} 
 
 {% block content %}
-
 <body style="color: #3C3836; overflow-y: scroll;">
     
-        <h1>{{ data[1] }}</h1>
+        <h1>{{ data['name'] }}</h1>
 
-        <p><strong>Nationalitet:</strong> {{ data[2] }}</p>
-        <p><strong>Fødselsår:</strong> {{ data[3] }}</p>
-    
-        {% if data[4] %}
-            <p><strong>Dødsår:</strong> {{ data[4] }} (Alder: {{ data[5] }} år)</p>
+        <p><strong>Nationalitet:</strong> {{ data['nationality'] }}</p>
+        <p><strong>Fødselsår:</strong> {{ data['birth'] }}</p>
+
+        {% if data['death'] %}
+            <p><strong>Dødsår:</strong> {{ data['death'] }} (Alder: {{ data['age'] }} år)</p>
         {% else %}
             <p><strong>Status:</strong> Nuværende alder er ikke angivet (Arkitekt er <i>nulevende</i>)</p>
         {% endif %}
 
-</body>
+        {% if data['portrait'] %}
+            <p><strong>Portræt:</strong></p> 
+            <p><img src="{{ data['portrait'] }}" alt="Portræt af {{ data['name'] }}" style="max-width: 300px;"></p>
+        {% else %}
+            <p><strong>Portræt:</strong> Intet billede tilgængeligt</p>
+        {% endif %}
 
+</body>
 {% endblock %}

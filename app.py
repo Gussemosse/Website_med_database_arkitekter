@@ -1,5 +1,5 @@
 from flask import Flask, request, render_template
-import sqlite3
+import sqlite3, base64
 
 app = Flask(__name__)
 # Database opsætning
@@ -39,14 +39,28 @@ def get_architect_info(aid):
     con = sqlite3.connect(DB_ARCHITECTS)
     con.row_factory = sqlite3.Row # <- så jeg kan bruge mine kolonnenavne direkte til bedre styling
     cur = con.cursor()
-    #Henter alle kolonner fra tabellen architects, for den specifikke arkitekt-ID.
+    # Henter alle kolonner fra tabellen architects, for den specifikke arkitekt-ID.
     query = "select * from architects where aid=?"
     cur.execute(query, (aid,))
-    res = cur.fetchall()
+    res = cur.fetchone()
     cur.close()
     con.close()
-    # Henter dataene og returnerer den første række. Det giver en samlet liste med alle informationerne om arkitekten
-    return res[0]
+    # Henter dataene og returnerer den første række. Det giver en samlet liste med alle informationerne om arkitekten.
+    if res:
+        # Konverter sqlite3.Row til et almindeligt dictionary, så det kan redigeres.
+        architect_dict = dict(res)
+        
+        # Tjekker om der faktisk er et billede.
+        if architect_dict.get('portrait'): 
+            # Konverter de rå binære bytes til en Base64-streng.
+            blob_bytes = architect_dict['portrait']
+            base64_string = base64.b64encode(blob_bytes).decode('utf-8')
+            
+            # Gemmer det som en færdig Data URL streng direkte i et dictionary.
+            architect_dict['portrait'] = f"data:image/jpeg;base64,{base64_string}"
+            
+        return architect_dict
+    return None
 
 # Routes
 @app.route("/", methods=["POST", "GET"])
