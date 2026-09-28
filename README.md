@@ -1,4 +1,4 @@
-# Vejrprogram_aarspr-ve
+# Webserver med database af bygninger og arkitekter ved søgning
 
 ## Nødvendige biblioteker
 Disse biblioteker bliver brugt i programmet, og skal installeres før det fungerer korrekt (eventuelt ved brug af et virtual environment):
